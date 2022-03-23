@@ -21,7 +21,7 @@ RUN ln -s /usr/lib/x86_64-linux-gnu/libmysqlclient.so /usr/lib/x86_64-linux-gnu/
 COPY ./milvus /var/lib/milvus
 ENV LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/var/lib/milvus/lib"
 
-RUN wget -O /tini https://github.com/krallin/tini/releases/download/v0.19.0/tini && \
+RUN wget -O /tini https://github.com/krallin/tini/releases/download/v0.19.0/tini --no-check-certificate && \
     chmod +x /tini
 
 ENTRYPOINT ["/tini", "--"]
@@ -31,4 +31,3 @@ WORKDIR /var/lib/milvus
 CMD [ "/var/lib/milvus/bin/milvus_server", "-c", "/var/lib/milvus/conf/server_config.yaml" ]
 
 EXPOSE 19530
-
